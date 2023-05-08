@@ -30,3 +30,63 @@ int	main(void)
 	exit(EXIT_SUCCESS);
 }
 
+int	parse_input(char *input, t_shell *s)
+{
+	t_list *cmds;
+	t_list *tokens;
+
+	tokens = split_input(input);
+}
+
+char	*handling_input(char *input)
+{
+	char	*line;
+	int		index;
+	
+	index = 0;
+	while ((input[index] >= 9 && input[index] <= 13) || input[index] == ' ')
+		index++;
+	if (input[index] == '\0')
+	{
+		free(input);
+		return (NULL);
+	}
+	line = ft_strtrim(input, "\t");
+	free(input);
+	if (ft_strlen(line) == 0)
+		return (NULL);
+	return (line);
+}
+
+int	wordlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (is_redirect(str))
+		return(is_redirect(str));
+	else if (is_opt(str))
+		return (is_opt(str));
+	while (str[i] && !ft_strchr(" \n\t<>|&", str[i]))
+	{
+		if (ft_strchr(/*QUOTES*/, str[i]))
+			i += qlen(&str[i]);
+		else
+			i++;
+	}
+	return (i);
+}
+
+static int	qlen(char *str)
+{
+	int	i;
+	
+	if (!ft_strchr(/*QUOTES*/, *str))
+		return (0);
+	i = 1;
+	while (str[i] && str [i] != str[0])
+		i++;
+	if (str[i] == str[0])
+		return (++i);
+	return (i);
+}
