@@ -21,5 +21,12 @@ int	main(void)
 		if (parse_input(line, &shell) == -1)
 			continue ;
 		if (cmd_execution (&shell) < 0)
+			perror("minishell");
+		ft_lstclear(&,&free_cmd);
 	}
+	printf("exit\n");
+	//minishell_clear(&shell);
+	//environment_clear(&shell.env);
+	exit(EXIT_SUCCESS);
 }
+
