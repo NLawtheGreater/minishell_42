@@ -125,10 +125,12 @@ bonus:	${BONUS_OBJS} ${SHARE_OBJS}
 
 clean:
 	@echo "$(RED)clean$(NOC)"
+	make clean -C $(LIB_DIR)
 	${RM} -r ${BUILD_DIR}
 
 fclean:	clean
 	@echo "$(RED)fclean$(NOC)"
+	make fclean -C $(LIB_DIR)
 	${RM} ${NAME} ${BONUS_NAME}
 
 re:	fclean all
