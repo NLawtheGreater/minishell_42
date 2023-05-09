@@ -11,7 +11,7 @@ t_list *split_input(char *line)
 		wlen = add_token(&token, line);
 		if (wlen < 0)
 		{
-			ft_lstclear(&token, & /*free token*/);
+			ft_lstclear(&token, &free_token);
 			return (NULL);
 		}
 		line += wlen;

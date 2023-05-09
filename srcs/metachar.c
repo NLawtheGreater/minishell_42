@@ -8,7 +8,7 @@ int	is_opt(char *s)
 		return (0);
 	if (!ft_strncmp(s, "||", 2))
 		return (2);
-	else if (!ft_strncmp(s, "||", 2))
+	else if (!ft_strncmp(s, "&&", 2))
 		return (2);
 	else if (!ft_strncmp(s, "|", 1))
 		return (1);

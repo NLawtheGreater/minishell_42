@@ -61,14 +61,24 @@ PRINT	= ${PRINT_DIR}libftprintf.a
 
 ### Minishell ###
 # Extra specific for minishell project
-INCLUDES = -I$(HEAD) \
+UNAME = $(shell uname -s)
+ifeq ($(UNAME), Darwin)
+INCLUDES =	-I /usr/local/opt/readline/include \
+ 			-I$(HEAD) \
 			-I$(LIB_DIR)
+READ	= -L /usr/local/opt/readline/lib \
+			-l readline
+
+else
+INCLUDES =	-I$(HEAD) \
+			-I$(LIB_DIR) 
+endif
 
 ### COMPILATION ###
 # the compilation flag that will we will use for the project
 
-CC	= 
-CFLAGS	=   -g -Wall -Wextra -Wextra $(PTHR) 
+CC	= gcc 
+CFLAGS	=   -g -Wall -Wextra -Wextra
 #-fsanitize=address
 RM	= rm -f
 
@@ -87,13 +97,13 @@ MSG = "Upload to git"
 
 
 ### RULES ###
-${NAME}:	${OBJS} ${SHARE_OBJS} ${LIB_DIR}
+${NAME}:	$(HEAD) ${OBJS} ${SHARE_OBJS} ${LIB_DIR}
 	make -C $(LIB_DIR)
-	${CC} ${CFLAGS} ${OBJS} ${SHARE_OBJS}\
+	${CC} ${CFLAGS} $(READ) $(LIBFT) ${OBJS} ${SHARE_OBJS}\
 	-o ${NAME}
 	@echo "$(GREEN) $@ Linking done!$(NOC)"
 
-$(BUILD_DIR)%.o:	%.c 
+$(BUILD_DIR)%.o:	%.c $(HEAD)
 	@mkdir -p $(BUILD_DIR)${SRC_DIR}
 	@mkdir -p $(BUILD_DIR)${SHARE_DIR}
 	@mkdir -p $(BUILD_DIR)${BONUS_DIR}
