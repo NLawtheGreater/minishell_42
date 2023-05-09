@@ -37,7 +37,7 @@ TESTER4		=
 # the name of your .c go here. SRC is for mandatory, BONUS is for the bonus. 
 # SHARE is for .c file that your mandatory and bonus use. LIBFT is where your specific libft .c file go.
 
-SRC	=	main.c metachar.c split_input.c
+SRC	=	main.c metachar.c split_input.c validate_token.c
 
 BONUS	=	
 

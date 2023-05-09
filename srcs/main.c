@@ -39,12 +39,18 @@ int	parse_input(char *input, t_shell *shell)
 
 	tokens = split_input(input);
 	free(input);
-	while (tokens != NULL)
+	/*while (tokens != NULL)
 	{
 		printf("%s\n", tokens->content);
 		tokens = tokens->next;
+	}*/
+	if(!validate_token(&tokens))
+	{
+		perror("Unexpected token");
+		printf("Unexpected token");
+		ft_lstclear(&tokens, &free_token);
+		return (-1);
 	}
-	/* Validate token? */
 	/*Get tokens from general list into command list*/
 	ft_lstclear(&tokens, &free_token);
 	return (0);

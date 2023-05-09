@@ -50,4 +50,6 @@ t_list *split_input(char *line);
 int	add_token(t_list **token, char *line);
 void	free_token(void *content);
 
+int	validate_token(t_list **tokens);
+
 #endif
