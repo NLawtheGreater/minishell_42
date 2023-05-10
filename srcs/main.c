@@ -56,6 +56,15 @@ int	parse_input(char *input, t_shell *shell)
 	return (0);
 }
 
+void minishell_clear(t_shell *shell)
+{
+	rl_clear_history();
+	environ = shell->env->env_tmp;
+	ft_split_free(shell->env->env_dup);
+	tcsetattr(STDIN_FILENO, TCSADRAIN, &shell->terminal->shell);
+	//Anything else to free?
+}
+
 char	*handling_input(char *input)
 {
 	char	*line;

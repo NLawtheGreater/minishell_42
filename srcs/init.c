@@ -2,6 +2,9 @@
 
 void init(t_shell *shell)
 {
+	shell->env->env_tmp = environ;
+	shell->env->env_dup = ft_split_dup(environ);
+	environ = shell->env->env_dup;
 	sigemptyset(&shell->sigint.sa_mask);
 	shell->sigint.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &shell->sigint, NULL);
@@ -11,7 +14,18 @@ void init(t_shell *shell)
 	sigemptyset(&shell->sigquit.sa_mask);
 	shell->sigquit.sa_flags = SA_RESTART;
 	sigaction(SIGQUIT, SIG_IGN, NULL);
+	if (shell_term(shell) == -1)
+	{
+		perror (/*error message*/);
 
+	}
+}
+
+int	shell_term(t_shell *shell)
+{
+	tcgetattr(STDIN_FILENO, &shell->terminal->minishell);
+	tcgetattr(STDIN_FILENO, &shell->terminal->shell);
+	
 }
 
 void	handling_signal(int signo)

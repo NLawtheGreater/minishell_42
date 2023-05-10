@@ -7,6 +7,7 @@
 # include <stdlib.h>
 # include <signal.h>
 # include <errno.h>
+# include <termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -25,18 +26,32 @@ typedef struct	s_token
 	int		opt;
 }			t_token;
 
+typedef struct s_env
+{
+	char	**env_tmp;
+	char	**env_dup;
+}			t_env;
+
+typedef struct s_terminal
+{
+	struct termios minishell;
+	struct termios shell;
+}	t_terminal;
+
 typedef struct s_shell
 {
 	char				*line;
 	t_token				*tokens;
-	//t_env				*env;
+	t_env				*env;
 	t_list				*cmds;
-	//t_terminal			*terminal;
+	t_terminal			*terminal;
 	int					exstat;
 	int					sinput;
 	struct sigaction	sigint;
 	struct sigaction	sigquit;
 }	t_shell;
+
+extern char **environ;
 
 int	parse_input(char *input, t_shell *shell);
 char	*handling_input(char *input);
