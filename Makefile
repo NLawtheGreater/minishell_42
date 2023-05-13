@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: niclaw <niclaw@student.42.fr>              +#+  +:+       +#+         #
+#    By: niclaw <nicklaw@gmail.com>                 +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/24 13:59:17 by niclaw            #+#    #+#              #
-#    Updated: 2023/05/02 15:54:23 by niclaw           ###   ########.fr        #
+#    Updated: 2023/05/13 14:38:36 by niclaw           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,10 +63,11 @@ PRINT	= ${PRINT_DIR}libftprintf.a
 # Extra specific for minishell project
 UNAME = $(shell uname -s)
 ifeq ($(UNAME), Darwin)
-INCLUDES =	-I /usr/local/opt/readline/include \
+READ_DIR = /usr/local/opt/readline
+INCLUDES =	-I $(READ_DIR)/include \
  			-I$(HEAD) \
 			-I$(LIB_DIR)
-READ	= -L /usr/local/opt/readline/lib \
+READ	= -L $(READ_DIR)/lib \
 			-l readline
 
 else
